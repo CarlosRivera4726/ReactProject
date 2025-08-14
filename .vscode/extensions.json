@@ -1,0 +1,25 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "mhutchie.git-graph",
+    "esbenp.prettier-vscode",
+    "mechatroner.rainbow-csv",
+    "xabikos.reactsnippets",
+    "rafamel.subtle-brackets",
+    "bradlc.vscode-tailwindcss"
+  ],
+  "unwantedRecommendations": [
+     "astro-build.astro-vscode", // Astro extension not needed
+        "prisma.prisma",
+        "ms-python.vscode-pylance", // Python extension not needed
+        "ms-toolsai.jupyter",         // Jupyter extension not needed
+        "ms-python.python",           // Python extension not needed
+        "ms-python.debugpy",
+        "ms-python.vscode-python-envs",
+        "sumitnalavade.vscode-readme-editor",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-containers",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+  ]
+}
