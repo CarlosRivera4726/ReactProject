@@ -1,16 +1,26 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 import SidebarLayout from "./components/SidebarLayout";
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      <Route element={<SidebarLayout />}>
-        <Route path="/" index element={<Home />} />
-        <Route path="/home" index element={<Home />} />
+      {/* Ruta pública para login */}
+      <Route path="/login" element={<Login />} />
+
+      {/* Rutas protegidas */}
+      <Route path="/" element={
+        <ProtectedRoute>
+          <SidebarLayout />
+        </ProtectedRoute>
+      }>
+        <Route index element={<Navigate to="/home" replace />} />
+        <Route path="home" element={<Home />} />
         <Route path="reports" element={<Reports />} />
         {/* <Route path="billing" element={<Billing />} />
         <Route path="invoice" element={<Invoice />} />

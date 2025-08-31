@@ -1,9 +1,17 @@
-import { ChartBarIcon, HomeIcon } from "@heroicons/react/16/solid";
+import { ArrowRightEndOnRectangleIcon, ChartBarIcon, HomeIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default function SidebarLayout() {
   const [open, setOpen] = useState(false);          // drawer (móvil)
+  const { logout, getEmail } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   const linkBase =
     "flex items-center p-2 rounded-lg transition text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700";
@@ -40,7 +48,7 @@ export default function SidebarLayout() {
           <ul className="space-y-2 font-medium">
             <li>
               <NavLink
-                to="/"
+                to="/home"
                 end
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
@@ -57,11 +65,26 @@ export default function SidebarLayout() {
             <li>
               <NavLink to="/reports" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                 <ChartBarIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-
                 <span className="flex-1 ms-3 whitespace-nowrap">Reportes</span>
               </NavLink>
             </li>
           </ul>
+
+          {/* Usuario y logout */}
+          <div className="absolute bottom-4 left-0 right-0 px-3">
+            <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                Usuario: {getEmail()}
+              </p>
+              <button
+                onClick={handleLogout}
+                className="flex items-center w-full p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 rounded-lg transition"
+              >
+                <ArrowRightEndOnRectangleIcon className="w-5 h-5 mr-2" />
+                Cerrar Sesión
+              </button>
+            </div>
+          </div>
         </div>
       </aside>
 
