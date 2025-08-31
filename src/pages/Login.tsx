@@ -47,8 +47,8 @@ export default function Login() {
     return (loading ? (
         <LoadingComponent />
     ) : (
-        <div className="flex flex-col justify-center items-center gap-10 w-full mt-44">
-            <h1 className="text-6xl font-bold text-black dark:text-white">Iniciar Sesion</h1>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center items-center gap-10 w-full">
+            <h1 className="text-6xl font-bold text-gray-900 dark:text-white">Iniciar Sesion</h1>
 
             {message !== '' ? <DangerAlert message={message} /> : null}
             <form className=" justify-center items-center w-96" onSubmit={handleSubmit(onSubmit)}>

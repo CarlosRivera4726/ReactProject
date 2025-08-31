@@ -1,7 +1,8 @@
-import { ArrowRightEndOnRectangleIcon, ChartBarIcon, HomeIcon } from "@heroicons/react/16/solid";
+import { ChartBarIcon, HomeIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/20/solid";
 
 export default function SidebarLayout() {
   const [open, setOpen] = useState(false);          // drawer (móvil)
@@ -48,7 +49,7 @@ export default function SidebarLayout() {
           <ul className="space-y-2 font-medium">
             <li>
               <NavLink
-                to="/ver-inspecciones-curso"
+                to="ver-inspecciones-curso"
                 end
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
@@ -60,12 +61,12 @@ export default function SidebarLayout() {
             </li>
 
             <li>
-              <NavLink to="/ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+              <NavLink to="ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                 <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/crear-inspeccion-curso" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+              <NavLink to="crear-inspeccion-curso" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                 <span className="flex-1 ms-3 whitespace-nowrap">Crear Inspección en Curso</span>
               </NavLink>
             </li>
@@ -82,7 +83,7 @@ export default function SidebarLayout() {
                 onClick={handleLogout}
                 className="flex items-center w-full p-2 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 rounded-lg transition"
               >
-                <ArrowRightEndOnRectangleIcon className="w-5 h-5 mr-2" />
+                <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
                 Cerrar Sesión
               </button>
             </div>

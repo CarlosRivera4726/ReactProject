@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import CrearInspeccionEnCurso from "./pages/CrearInspeccionEnCurso";
@@ -19,15 +19,16 @@ function App() {
       <Route path="/" element={
         <ProtectedRoute>
           <SidebarLayout />
-          <Route path="/home" index element={<Home />} />
-          {/* inspecciones en curso las ve el inspector y usuario*/}
-          <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />
-          {/* inspecciones finalizadas las ve solo el usuario*/}
-          <Route path="ver-inspecciones-finalizadas" element={<VerInspeccionesFinalizadas />} />
-          {/* crear inspeccion lo ve solo el inspector*/}
-          <Route path="crear-inspeccion-curso" element={<CrearInspeccionEnCurso />} />
         </ProtectedRoute>
       }>
+        <Route index element={<Home />} />
+        <Route path="home" element={<Home />} />
+        {/* inspecciones en curso las ve el inspector y usuario*/}
+        <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />
+        {/* inspecciones finalizadas las ve solo el usuario*/}
+        <Route path="ver-inspecciones-finalizadas" element={<VerInspeccionesFinalizadas />} />
+        {/* crear inspeccion lo ve solo el inspector*/}
+        <Route path="crear-inspeccion-curso" element={<CrearInspeccionEnCurso />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
