@@ -36,32 +36,44 @@ export default function SidebarLayout() {
           } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
             <li>
               <NavLink
-                to="/"
+                to="/ver-inspecciones-curso"
                 end
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   `${linkBase} ${isActive ? active : ""}`
                 }
               >
-                {/* ícono */}
-                <HomeIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="ms-3">Inicio</span>
+                <span className="ms-3">Ver Inspecciones en Curso</span>
               </NavLink>
             </li>
 
-            {/* Más ítems de ejemplo */}
             <li>
-              <NavLink to="/reports" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                <ChartBarIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-
-                <span className="flex-1 ms-3 whitespace-nowrap">Reportes</span>
+              <NavLink to="/ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/crear-inspeccion-curso" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                <span className="flex-1 ms-3 whitespace-nowrap">Crear Inspección en Curso</span>
+              </NavLink>
+            </li>
+
           </ul>
+          <ul className="space-y-2 font-medium">
+            <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 justify-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue- w-full gap-2">
+              <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2" />
+              </svg>
+              Cerrar Sesión
+            </button>
+          </ul>
+        </div>
+        <div>
+
         </div>
       </aside>
 
