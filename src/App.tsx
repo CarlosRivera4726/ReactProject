@@ -1,11 +1,13 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Reports from "./pages/Reports";
+import CrearInspeccionEnCurso from "./pages/CrearInspeccionEnCurso";
 import NotFound from "./pages/NotFound";
 import SidebarLayout from "./components/SidebarLayout";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import VerInspeccionesEnCurso from "./pages/VerInspeccionesEnCurso";
+import VerInspeccionesFinalizadas from "./pages/VerInspeccionesFinalizadas";
 
 function App() {
   return (
@@ -17,15 +19,15 @@ function App() {
       <Route path="/" element={
         <ProtectedRoute>
           <SidebarLayout />
+          <Route path="/home" index element={<Home />} />
+          {/* inspecciones en curso las ve el inspector y usuario*/}
+          <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />
+          {/* inspecciones finalizadas las ve solo el usuario*/}
+          <Route path="ver-inspecciones-finalizadas" element={<VerInspeccionesFinalizadas />} />
+          {/* crear inspeccion lo ve solo el inspector*/}
+          <Route path="crear-inspeccion-curso" element={<CrearInspeccionEnCurso />} />
         </ProtectedRoute>
       }>
-        <Route index element={<Navigate to="/home" replace />} />
-        <Route path="home" element={<Home />} />
-        <Route path="reports" element={<Reports />} />
-        {/* <Route path="billing" element={<Billing />} />
-        <Route path="invoice" element={<Invoice />} />
-        <Route path="inbox" element={<Inbox />} />
-        <Route path="users" element={<Users />} /> */}
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

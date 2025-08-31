@@ -44,30 +44,32 @@ export default function SidebarLayout() {
           } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
             <li>
               <NavLink
-                to="/home"
+                to="/ver-inspecciones-curso"
                 end
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   `${linkBase} ${isActive ? active : ""}`
                 }
               >
-                {/* ícono */}
-                <HomeIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="ms-3">Inicio</span>
+                <span className="ms-3">Ver Inspecciones en Curso</span>
               </NavLink>
             </li>
 
-            {/* Más ítems de ejemplo */}
             <li>
-              <NavLink to="/reports" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                <ChartBarIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="flex-1 ms-3 whitespace-nowrap">Reportes</span>
+              <NavLink to="/ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/crear-inspeccion-curso" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                <span className="flex-1 ms-3 whitespace-nowrap">Crear Inspección en Curso</span>
+              </NavLink>
+            </li>
+
           </ul>
 
           {/* Usuario y logout */}
