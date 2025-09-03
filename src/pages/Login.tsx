@@ -25,6 +25,23 @@ export default function Login() {
         formState: { errors },
     } = useForm<Inputs>();
 
+    const createTestUser = async () => {
+        try {
+            const testUser = {
+                name: "inspector",
+                email: "inspector1@gmail.com",
+                password: "123",
+                role: 'INSPECTOR'
+            };
+            
+            await axios.post('http://localhost:3000/user', testUser);
+            setMessage("Usuario de prueba creado exitosamente");
+        } catch (error) {
+            console.log(error);
+            setMessage("Error al crear usuario de prueba");
+        }
+    };
+
     const onSubmit: SubmitHandler<Inputs> = async (data: IUser) => {
         setLoading(true);
         try {
@@ -51,6 +68,14 @@ export default function Login() {
             <h1 className="text-6xl font-bold text-gray-900 dark:text-white">Iniciar Sesion</h1>
 
             {message !== '' ? <DangerAlert message={message} /> : null}
+
+
+            {/*crear usuario de prueba*/}
+            <button
+                onClick={createTestUser}
+                className="bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            ></button>
+
             <form className=" justify-center items-center w-96" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-5">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electronico:</label>

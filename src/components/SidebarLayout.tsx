@@ -19,6 +19,8 @@ export default function SidebarLayout() {
   const active =
     "!bg-gray-100 dark:!bg-gray-700 !text-gray-900 dark:!text-white";
 
+  const userRole = localStorage.getItem('role'); // "inspector" | "admin"
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Botón hamburguesa (móvil) */}
@@ -47,29 +49,29 @@ export default function SidebarLayout() {
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
-            <li>
-              <NavLink
-                to="ver-inspecciones-curso"
-                end
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `${linkBase} ${isActive ? active : ""}`
-                }
-              >
-                <span className="ms-3">Ver Inspecciones en Curso</span>
-              </NavLink>
-            </li>
+            {userRole === 'INSPECTOR' &&(
+              <li>
+                <NavLink
+                  to="ver-inspecciones-curso"
+                  end
+                  onClick={() => setOpen(false)}
+                  className={({ isActive }) =>
+                    `${linkBase} ${isActive ? active : ""}`
+                  }
+                >
+                  <span className="ms-3">Ver Inspecciones en Curso</span>
+                </NavLink>
+              </li>
+            )}
 
-            <li>
-              <NavLink to="ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="crear-inspeccion-curso" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                <span className="flex-1 ms-3 whitespace-nowrap">Crear Inspección en Curso</span>
-              </NavLink>
-            </li>
+            {userRole === 'USER' && (
+              <li>
+                <NavLink to="ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                  <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
+                </NavLink>
+              </li>
+            )}
+
 
           </ul>
 
@@ -77,7 +79,7 @@ export default function SidebarLayout() {
           <div className="absolute bottom-4 left-0 right-0 px-3">
             <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                Usuario: {getEmail()}
+                {localStorage.getItem('role')}: {getEmail()}
               </p>
               <button
                 onClick={handleLogout}
