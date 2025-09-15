@@ -81,7 +81,7 @@ export default function SidebarLayout() {
                 </li>
                 <li>
                   <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Ubicacion</span>
+                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Ubicaciones</span>
                   </NavLink>
                 </li>
               </>
