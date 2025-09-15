@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import CrearInspeccionEnCurso from "./pages/CrearInspeccionEnCurso";
-import NotFound from "./pages/NotFound";
+import CrearInspeccionEnCurso from "./pages/inspecciones/CrearInspeccionEnCurso";
+import NotFound from "./pages/NotFound/NotFound";
 import SidebarLayout from "./components/SidebarLayout";
-import Login from "./pages/Login";
+import Login from "./pages/login/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import VerInspeccionesEnCurso from "./pages/VerInspeccionesEnCurso";
-import VerInspeccionesFinalizadas from "./pages/VerInspeccionesFinalizadas";
-import CrearUbicacion from "./pages/CrearUbicacion";
+import VerInspeccionesEnCurso from "./pages/inspecciones/VerInspeccionesEnCurso";
+import VerInspeccionesFinalizadas from "./pages/inspecciones/VerInspeccionesFinalizadas";
+import CrearUbicacion from "./pages/ubicaciones/CrearUbicacion";
+import VerUbicaciones from "./pages/ubicaciones/VerUbicaciones";
 
 function App() {
   return (
@@ -24,7 +25,12 @@ function App() {
       }>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
+
+        {/** ubicaciones */}
+        <Route path="ver-ubicaciones" element={<VerUbicaciones />} />
         <Route path="crear-ubicacion" element={<CrearUbicacion />} />
+
+        {/** inspecciones */}
         {/* inspecciones en curso las ve el inspector y usuario*/}
         <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />
         {/* inspecciones finalizadas las ve solo el usuario*/}
