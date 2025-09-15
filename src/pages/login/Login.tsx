@@ -1,20 +1,20 @@
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
-import type { IUser } from "../interfaces/user.interface";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingComponent from "../components/LoadingComponent";
-import { useAuth } from "../hooks/useAuth";
-import { Status } from "../enums/Status.enum";
-import AlertsComponent from "../components/alerts/Alerts.component";
+import { Status } from "../../enums/Status.enum";
+import { useAuth } from "../../hooks/useAuth";
+import { API_URL } from "../../const/ApiUrl";
+import type { IUser } from "../../interfaces/user.interface";
+import LoadingComponent from "../../components/LoadingComponent";
+import AlertsComponent from "../../components/alerts/Alerts.component";
 
 type Inputs = {
     email: string
     password: string
 }
 
-const URL_API = 'http://localhost:4000';
 
 
 export default function Login() {
@@ -52,9 +52,9 @@ export default function Login() {
                 role: 'USER'
             };
 
-            await axios.post(`${URL_API}/persona`, testUserInspector);
-            await axios.post(`${URL_API}/persona`, testUserAdmin);
-            await axios.post(`${URL_API}/persona`, testUser);
+            await axios.post(`${API_URL}/persona`, testUserInspector);
+            await axios.post(`${API_URL}/persona`, testUserAdmin);
+            await axios.post(`${API_URL}/persona`, testUser);
             setMessage("Usuario de prueba creado exitosamente");
             setStatus(Status.SUCCESS);
         } catch (error) {
@@ -67,7 +67,7 @@ export default function Login() {
     const onSubmit: SubmitHandler<Inputs> = async (data: IUser) => {
         setLoading(true);
         try {
-            const result = await axios.post(`${URL_API}/auth/login`, data);
+            const result = await axios.post(`${API_URL}/auth/login`, data);
 
             if (result && result.data) {
                 login(result.data.access_token, result.data.email, result.data.role);

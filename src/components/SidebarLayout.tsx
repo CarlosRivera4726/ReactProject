@@ -73,11 +73,18 @@ export default function SidebarLayout() {
             )}
 
             {userRole === 'ADMIN' && (
-              <li>
-                <NavLink to="crear-ubicacion" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                  <span className="flex-1 ms-3 whitespace-nowrap">Crear Ubicacion</span>
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink to="crear-ubicacion" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                    <span className="flex-1 ms-3 whitespace-nowrap">Crear Ubicacion</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Ubicacion</span>
+                  </NavLink>
+                </li>
+              </>
             )}
 
 

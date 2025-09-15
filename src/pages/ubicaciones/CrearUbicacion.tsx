@@ -1,9 +1,9 @@
 import axios from "axios"
 import { useForm, type SubmitHandler } from "react-hook-form"
-import { API_URL } from "../const/ApiUrl"
 import { useState } from "react"
-import { Status } from "../enums/Status.enum"
-import AlertsComponent from "../components/alerts/Alerts.component"
+import { Status } from "../../enums/Status.enum"
+import { API_URL } from "../../const/ApiUrl"
+import AlertsComponent from "../../components/alerts/Alerts.component"
 
 type Inputs = {
     latitud: string
