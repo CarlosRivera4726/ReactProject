@@ -1,4 +1,4 @@
-import { ChartBarIcon, HomeIcon } from "@heroicons/react/16/solid";
+
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
@@ -49,7 +49,7 @@ export default function SidebarLayout() {
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
-            {userRole === 'INSPECTOR' &&(
+            {userRole === 'INSPECTOR' && (
               <li>
                 <NavLink
                   to="ver-inspecciones-curso"

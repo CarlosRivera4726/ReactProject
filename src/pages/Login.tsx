@@ -4,18 +4,22 @@ import type { IUser } from "../interfaces/user.interface";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DangerAlert from "../components/alerts/DangerAlert";
 import LoadingComponent from "../components/LoadingComponent";
 import { useAuth } from "../hooks/useAuth";
+import { Status } from "../enums/Status.enum";
+import AlertsComponent from "../components/alerts/Alerts.component";
 
 type Inputs = {
     email: string
     password: string
 }
 
+const URL_API = 'http://localhost:4000';
+
 
 export default function Login() {
     const [message, setMessage] = useState('');
+    const [status, setStatus] = useState(Status.INFO);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -33,19 +37,21 @@ export default function Login() {
                 password: "123",
                 role: 'INSPECTOR'
             };
-            
-            await axios.post('http://localhost:3000/user', testUser);
+
+            await axios.post(`${URL_API}/persona`, testUser);
             setMessage("Usuario de prueba creado exitosamente");
+            setStatus(Status.SUCCESS);
         } catch (error) {
             console.log(error);
             setMessage("Error al crear usuario de prueba");
+            setStatus(Status.ERROR);
         }
     };
 
     const onSubmit: SubmitHandler<Inputs> = async (data: IUser) => {
         setLoading(true);
         try {
-            const result = await axios.post('http://localhost:3000/auth/login', data);
+            const result = await axios.post(`${URL_API}/auth/login`, data);
 
             if (result && result.data) {
                 login(result.data.access_token, result.data.email, result.data.role);
@@ -55,6 +61,7 @@ export default function Login() {
             console.log(error)
             if (axios.isAxiosError(error)) {
                 setMessage("Usuario no autenticado, por favor intente nuevamente.")
+                setStatus(Status.ERROR);
             }
         } finally {
             setLoading(false);
@@ -67,7 +74,7 @@ export default function Login() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center items-center gap-10 w-full">
             <h1 className="text-6xl font-bold text-gray-900 dark:text-white">Iniciar Sesion</h1>
 
-            {message !== '' ? <DangerAlert message={message} /> : null}
+            {message !== '' ? <AlertsComponent message={message} status={status} /> : null}
 
 
             {/*crear usuario de prueba*/}
