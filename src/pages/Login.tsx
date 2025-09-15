@@ -31,13 +31,29 @@ export default function Login() {
 
     const createTestUser = async () => {
         try {
-            const testUser = {
+            const testUserInspector = {
                 name: "inspector",
                 email: "inspector1@gmail.com",
                 password: "123",
                 role: 'INSPECTOR'
             };
 
+            const testUserAdmin = {
+                name: "admin",
+                email: "admin1@gmail.com",
+                password: "123",
+                role: 'ADMIN'
+            };
+
+            const testUser = {
+                name: "user",
+                email: "user1@gmail.com",
+                password: "123",
+                role: 'USER'
+            };
+
+            await axios.post(`${URL_API}/persona`, testUserInspector);
+            await axios.post(`${URL_API}/persona`, testUserAdmin);
             await axios.post(`${URL_API}/persona`, testUser);
             setMessage("Usuario de prueba creado exitosamente");
             setStatus(Status.SUCCESS);

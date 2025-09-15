@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import VerInspeccionesEnCurso from "./pages/VerInspeccionesEnCurso";
 import VerInspeccionesFinalizadas from "./pages/VerInspeccionesFinalizadas";
+import CrearUbicacion from "./pages/CrearUbicacion";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       }>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
+        <Route path="crear-ubicacion" element={<CrearUbicacion />} />
         {/* inspecciones en curso las ve el inspector y usuario*/}
         <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />
         {/* inspecciones finalizadas las ve solo el usuario*/}
