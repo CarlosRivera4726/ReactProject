@@ -9,7 +9,7 @@ import { Status } from "../../enums/Status.enum";
 
 const VerInspectores = () => {
     const [message, setMessage] = useState('');
-    const [status, setStatus] = useState(Status.INFO)
+    const [_, setStatus] = useState(Status.INFO)
 
     const [inspectores, setInspectores] = useState<Inspector[]>([])
 

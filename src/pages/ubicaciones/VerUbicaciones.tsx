@@ -10,7 +10,7 @@ import pencilsvg from "../../assets/pencil.svg";
 const VerUbicaciones = () => {
     const [ubicaciones, setUbicaciones] = useState<Location[]>([]);
     const [message, setMessage] = useState('');
-    const [status, setStatus] = useState(Status.INFO);
+    const [_, setStatus] = useState(Status.INFO);
 
     const getUbicaciones = async () => {
         try {
