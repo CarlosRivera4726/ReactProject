@@ -3,8 +3,17 @@ import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/20/solid";
+import LocationIcon from "../assets/location.svg";
+import AddIcon from "../assets/AddIcon.svg";
+import EyeIcon from "../assets/EyeIcon.svg";
+import InspectionIcon from "../assets/InspectionIcon.svg";
+import SpanLink from "./SpanLink";
+import UsersIcon from "../assets/UsersIcon.svg";
 
 export default function SidebarLayout() {
+  const [ddUbic, setDdUbic] = useState(false);
+  const [ddInsp, setDdInsp] = useState(false);
+  const [ddUser, setDdUser] = useState(false);
   const [open, setOpen] = useState(false);          // drawer (móvil)
   const { logout, getEmail } = useAuth();
   const navigate = useNavigate();
@@ -43,9 +52,8 @@ export default function SidebarLayout() {
       {/* SIDEBAR */}
       <aside
         id="sidebar-multi-level-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${open ? "translate-x-0" : "-translate-x-full"
-          } sm:translate-x-0`}
         aria-label="Sidebar"
+        className={`fixed top-0 left-0 z-40 w-72 h-screen transition-transform ${open ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
@@ -74,31 +82,107 @@ export default function SidebarLayout() {
 
             {(userRole === 'ADMIN' || userRole === 'DEVELOPER') && (
               <>
+                {/** Section Ubicaciones */}
                 <li>
-                  <NavLink to="crear-ubicacion" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Crear Ubicacion</span>
-                  </NavLink>
+                  <button
+                    type="button"
+                    onClick={() => setDdUbic((v) => !v)}
+                    aria-expanded={ddUbic}
+                    className="cursor-pointer flex items-center w-full p-1 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    aria-controls="dropdown-ubicaciones"
+                    data-collapse-toggle="dropdown-ubicaciones">
+                    <img src={LocationIcon} alt="location-icon" width={23} height={25} />
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Gestión Ubicaciones</span>
+                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                  </button>
+                  <ul id="dropdown-ubicaciones" className={`${ddUbic ? 'block' : 'hidden'} py-2 space-y-2`}>
+                    <li>
+                      <NavLink to="crear-ubicacion" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink>
+                          <img src={AddIcon} alt="add-icon" width={23} height={25} />
+                          Crear Ubicacion
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink >
+                          <img src={EyeIcon} alt="add-icon" width={23} height={25} />
+                          Ver Ubicaciones
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+                  </ul>
                 </li>
+                {/** Section Inspectores */}
                 <li>
-                  <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Ubicaciones</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="ver-inspectores" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspectores</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="ver-usuarios" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Usuarios</span>
-                  </NavLink>
-                </li>
+                  <button type="button"
+                    onClick={() => setDdInsp((v) => !v)}
+                    aria-expanded={ddInsp}
+                    className="cursor-pointer flex items-center w-full p-1 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    aria-controls="dropdown-inspection" data-collapse-toggle="dropdown-inspection">
+                    <img src={InspectionIcon} alt="location-icon" width={23} height={25} />
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Gestion Inspectiores</span>
+                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                  </button>
+                  <ul id="dropdown-inspection" className={`${ddInsp ? 'block' : 'hidden'} py-2 space-y-2`}>
+                    <li>
+                      <NavLink to="ver-inspectores" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
 
+                        <SpanLink>
+                          <img src={EyeIcon} alt="add-icon" width={23} height={25} />
+                          Ver Inspectores
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink>
+                          <img src={AddIcon} alt="add-icon" width={23} height={25} />
+                          Añadir ubicacion a Inspector
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
+                {/** Section Usuarios */}
                 <li>
-                  <NavLink to="crear-usuario" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-                    <span className="flex-1 ms-3 whitespace-nowrap">Crear Usuario</span>
-                  </NavLink>
+                  <button
+                    type="button"
+                    className="cursor-pointer flex items-center w-full p-1 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    onClick={() => setDdUser((v) => !v)}
+                    aria-expanded={ddUser}
+                    aria-controls="dropdown-user" data-collapse-toggle="dropdown-user">
+                    <img src={UsersIcon} alt="location-icon" width={23} height={25} />
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Gestion Usuarios</span>
+                    <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                  </button>
+                  <ul id="dropdown-user" className={`${ddUser ? 'block' : 'hidden'} py-2 space-y-2`}>
+                    <li>
+                      <NavLink to="ver-usuarios" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink>
+                          <img src={EyeIcon} alt="add-icon" width={23} height={25} />
+                          Ver Usuarios
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+
+                    <li>
+                      <NavLink to="crear-usuario" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink>
+                          <img src={AddIcon} alt="add-icon" width={23} height={25} />
+                          Crear Usuario
+                        </SpanLink>
+                      </NavLink>
+                    </li>
+
+                  </ul>
                 </li>
               </>
             )}

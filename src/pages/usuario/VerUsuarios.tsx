@@ -17,12 +17,10 @@ const VerUsuarios = () => {
         try {
             const result = await axios.get(`${API_URL}/usuario`);
             const { message, data } = result.data;
-            console.log(data)
             setUsuarios(data);
             setMessage(message);
             setStatus(Status.SUCCESS);
         } catch (error) {
-            console.log(error);
             setMessage(message);
             setStatus(Status.ERROR);
         }

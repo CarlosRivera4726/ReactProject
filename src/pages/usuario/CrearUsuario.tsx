@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { Status } from "../../enums/Status.enum"
@@ -24,18 +24,38 @@ const CrearUsuario = () => {
         formState: { errors },
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        // const location = {
-        //     name: data.ubicacion,
-        //     coordinates: data.latitud + ',' + data.longitud,
-        // }
+        try {
+            if (data.password !== data.confirm_password) {
+                setMessage('Las contraseñas no coinciden');
+                setStatus(Status.ERROR);
+                return;
+            }
+            const usuario = {
+                personaId: 0,
+                name: data.name,
+                lastName: data.lastName,
+                email: data.email,
+                password: data.password,
+            }
+            console.log(usuario)
 
-        const result = await axios.post(`${API_URL}/location`, location);
-        console.log(result.data)
-        const { message, status } = result.data;
-        setMessage(message);
-        setStatus(status === 201 ? Status.SUCCESS : Status.ERROR);
-        if (status === 201) {
-            reset();
+            const result = await axios.post(`${API_URL}/usuario`, usuario);
+            const { message, status } = result.data;
+            console.log(message, status)
+            setMessage(message);
+            setStatus(status === 201 ? Status.SUCCESS : Status.ERROR);
+            if (status === 201) {
+                reset();
+            }
+        } catch (error: AxiosError | unknown) {
+            if (axios.isAxiosError(error) && error.response) {
+                const { message } = error.response.data;
+                setMessage(message);
+                setStatus(message.includes('correo') ? Status.INFO : Status.ERROR);
+            } else {
+                setMessage('Error desconocido');
+                setStatus(Status.ERROR);
+            }
         }
     }
     return (
