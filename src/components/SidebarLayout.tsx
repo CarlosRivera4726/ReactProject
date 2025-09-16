@@ -64,7 +64,7 @@ export default function SidebarLayout() {
               </li>
             )}
 
-            {userRole === 'USER' && (
+            {userRole === 'USUARIO' && (
               <li>
                 <NavLink to="ver-inspecciones-finalizadas" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                   <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspecciones Finalizadas</span>
@@ -72,7 +72,7 @@ export default function SidebarLayout() {
               </li>
             )}
 
-            {userRole === 'ADMIN' && (
+            {(userRole === 'ADMIN' || userRole === 'DEVELOPER') && (
               <>
                 <li>
                   <NavLink to="crear-ubicacion" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
@@ -82,6 +82,11 @@ export default function SidebarLayout() {
                 <li>
                   <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                     <span className="flex-1 ms-3 whitespace-nowrap">Ver Ubicaciones</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="ver-inspectores" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspectores</span>
                   </NavLink>
                 </li>
               </>

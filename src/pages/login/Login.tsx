@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Status } from "../../enums/Status.enum";
 import { useAuth } from "../../hooks/useAuth";
 import { API_URL } from "../../const/ApiUrl";
-import type { IUser } from "../../interfaces/user.interface";
+import type { IPersona } from "../../interfaces/persona.interface";
 import LoadingComponent from "../../components/LoadingComponent";
 import AlertsComponent from "../../components/alerts/Alerts.component";
 
@@ -49,12 +49,13 @@ export default function Login() {
                 name: "user",
                 email: "user1@gmail.com",
                 password: "123",
-                role: 'USER'
+                role: 'USUARIO'
             };
 
             await axios.post(`${API_URL}/persona`, testUserInspector);
             await axios.post(`${API_URL}/persona`, testUserAdmin);
-            await axios.post(`${API_URL}/persona`, testUser);
+            const result = await axios.post(`${API_URL}/persona`, testUser);
+            console.log(result);
             setMessage("Usuario de prueba creado exitosamente");
             setStatus(Status.SUCCESS);
         } catch (error) {
@@ -64,7 +65,7 @@ export default function Login() {
         }
     };
 
-    const onSubmit: SubmitHandler<Inputs> = async (data: IUser) => {
+    const onSubmit: SubmitHandler<Inputs> = async (data: IPersona) => {
         setLoading(true);
         try {
             const result = await axios.post(`${API_URL}/auth/login`, data);

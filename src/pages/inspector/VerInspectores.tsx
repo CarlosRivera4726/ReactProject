@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { Status } from "../../enums/Status.enum";
-import type { Location } from "../../interfaces/location.interface";
+import type { Inspector } from "../../interfaces/inspector.interface";
+import PencilSVG from "../../assets/pencil.svg";
+import TrashSVG from "../../assets/trash.svg";
 import axios from "axios";
 import { API_URL } from "../../const/ApiUrl";
-import { StatusLocation } from "../../const/Status";
-import StatusLocationComponent from "../../components/StatusLocation.component";
-import pencilsvg from "../../assets/pencil.svg";
+import { Status } from "../../enums/Status.enum";
 
-const VerUbicaciones = () => {
-    const [ubicaciones, setUbicaciones] = useState<Location[]>([]);
+
+const VerInspectores = () => {
     const [message, setMessage] = useState('');
-    const [status, setStatus] = useState(Status.INFO);
+    const [status, setStatus] = useState(Status.INFO)
 
-    const getUbicaciones = async () => {
+    const [inspectores, setInspectores] = useState<Inspector[]>([])
+
+    const getInspectores = async () => {
         try {
-            const result = await axios.get(`${API_URL}/location`);
+            const result = await axios.get(`${API_URL}/inspector`);
             const { message, data } = result.data;
-            setUbicaciones(data);
+            console.log(data)
+            setInspectores(data);
             setMessage(message);
             setStatus(Status.SUCCESS);
         } catch (error) {
@@ -27,11 +29,12 @@ const VerUbicaciones = () => {
     }
 
     useEffect(() => {
-        getUbicaciones();
+        getInspectores();
     }, []);
+
     return (
         <div className="flex flex-col justify-center items-center text-white gap-14">
-            <h1 className="text-3xl font-bold">Ver Ubicaciones</h1>
+            <h1 className="text-3xl font-bold">Ver Inspectores</h1>
 
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -59,35 +62,33 @@ const VerUbicaciones = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {ubicaciones && ubicaciones.length > 0 ? (
-                            ubicaciones.map((ubicacion) => (
-                                <tr key={ubicacion.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
+                        {inspectores && inspectores.length > 0 ? (
+                            inspectores.map((inspector) => (
+                                <tr key={inspector.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {`UBI-${String(ubicacion.id).padStart(6, '0')}`}
+                                        {`INSP-${String(inspector.id).padStart(7, '0')}`}
                                     </th>
                                     <td className="px-6 py-4">
-                                        {ubicacion.coordinates.split(',')[0]}
+                                        {inspector.persona.name}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {ubicacion.coordinates.split(',')[1]}
+                                        {inspector.persona.email}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {ubicacion.name}
+                                        {'•'.repeat(10)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <StatusLocationComponent
-                                            status={StatusLocation[ubicacion.status as keyof typeof StatusLocation]}
-                                        />
+                                        {inspector.locationId === null ? "No hay Ubicacion" : inspector.location.name}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex justify-start items-center gap-2">
-                                            <div data-tooltip-target="tooltip-dark">
-                                                <img src={pencilsvg} alt="pencil" width={35} className="cursor-pointer" />
+                                            <div>
+                                                <img src={PencilSVG} alt="pencil" width={35} className="cursor-pointer" />
                                             </div>
-                                            <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                                                Tooltip content
-                                                <div className="tooltip-arrow" data-popper-arrow></div>
+                                            <div>
+                                                <img src={TrashSVG} alt="pencil" width={35} className="cursor-pointer" />
                                             </div>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -95,7 +96,7 @@ const VerUbicaciones = () => {
                         ) : (
                             <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                                 <td colSpan={6} className="px-6 py-4 text-center">
-                                    No hay ubicaciones disponibles
+                                    No hay inspectores disponibles
                                 </td>
                             </tr>
                         )}
@@ -107,4 +108,4 @@ const VerUbicaciones = () => {
     )
 }
 
-export default VerUbicaciones;
+export default VerInspectores;
