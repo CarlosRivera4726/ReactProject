@@ -89,6 +89,11 @@ export default function SidebarLayout() {
                     <span className="flex-1 ms-3 whitespace-nowrap">Ver Inspectores</span>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="ver-usuarios" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                    <span className="flex-1 ms-3 whitespace-nowrap">Ver Usuarios</span>
+                  </NavLink>
+                </li>
               </>
             )}
 

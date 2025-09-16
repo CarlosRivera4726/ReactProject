@@ -11,6 +11,7 @@ import VerInspeccionesFinalizadas from "./pages/inspecciones/VerInspeccionesFina
 import CrearUbicacion from "./pages/ubicaciones/CrearUbicacion";
 import VerUbicaciones from "./pages/ubicaciones/VerUbicaciones";
 import VerInspectores from "./pages/inspector/VerInspectores";
+import VerUsuarios from "./pages/usuario/VerUsuarios";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path="crear-ubicacion" element={<CrearUbicacion />} />
         {/** Inspectores */}
         <Route path="ver-inspectores" element={<VerInspectores />} />
+        {/** usuarios */}
+        <Route path="ver-usuarios" element={<VerUsuarios />} />
         {/** inspecciones */}
         {/* inspecciones en curso las ve el inspector y usuario*/}
         <Route path="ver-inspecciones-curso" element={<VerInspeccionesEnCurso />} />

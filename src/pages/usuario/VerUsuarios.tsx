@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import type { Inspector } from "../../interfaces/inspector.interface";
 import PencilSVG from "../../assets/pencil.svg";
 import TrashSVG from "../../assets/trash.svg";
 import axios from "axios";
 import { API_URL } from "../../const/ApiUrl";
 import { Status } from "../../enums/Status.enum";
+import type { Usuario } from "../../interfaces/usuario.interface";
 
 
-const VerInspectores = () => {
+const VerUsuarios = () => {
     const [message, setMessage] = useState('');
     const [_, setStatus] = useState(Status.INFO)
 
-    const [inspectores, setInspectores] = useState<Inspector[]>([])
+    const [usuarios, setUsuarios] = useState<Usuario[]>([])
 
-    const getInspectores = async () => {
+    const getUsuarios = async () => {
         try {
-            const result = await axios.get(`${API_URL}/inspector`);
+            const result = await axios.get(`${API_URL}/usuario`);
             const { message, data } = result.data;
             console.log(data)
-            setInspectores(data);
+            setUsuarios(data);
             setMessage(message);
             setStatus(Status.SUCCESS);
         } catch (error) {
@@ -29,7 +29,7 @@ const VerInspectores = () => {
     }
 
     useEffect(() => {
-        getInspectores();
+        getUsuarios();
     }, []);
 
     return (
@@ -52,9 +52,6 @@ const VerInspectores = () => {
                             <th scope="col" className="px-6 py-3">
                                 Contrasena
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Ubicacion
-                            </th>
 
                             <th scope="col" className="px-6 py-3">
                                 Opciones
@@ -62,23 +59,20 @@ const VerInspectores = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {inspectores && inspectores.length > 0 ? (
-                            inspectores.map((inspector) => (
-                                <tr key={inspector.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
+                        {usuarios && usuarios.length > 0 ? (
+                            usuarios.map((usuario) => (
+                                <tr key={usuario.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        {`INSP-${String(inspector.id).padStart(7, '0')}`}
+                                        {`USR-${String(usuario.id).padStart(7, '0')}`}
                                     </th>
                                     <td className="px-6 py-4">
-                                        {inspector.persona.name}
+                                        {usuario.persona.name}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {inspector.persona.email}
+                                        {usuario.persona.email}
                                     </td>
                                     <td className="px-6 py-4">
                                         {'•'.repeat(10)}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        {inspector.locationId === null ? "No hay Ubicacion" : inspector.location.name}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex justify-start items-center gap-2">
@@ -96,7 +90,7 @@ const VerInspectores = () => {
                         ) : (
                             <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                                 <td colSpan={6} className="px-6 py-4 text-center">
-                                    No hay inspectores disponibles
+                                    No hay usuarios disponibles
                                 </td>
                             </tr>
                         )}
@@ -108,4 +102,4 @@ const VerInspectores = () => {
     )
 }
 
-export default VerInspectores;
+export default VerUsuarios;
