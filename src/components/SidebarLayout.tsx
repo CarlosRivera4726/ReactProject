@@ -9,6 +9,7 @@ import EyeIcon from "../assets/EyeIcon.svg";
 import InspectionIcon from "../assets/InspectionIcon.svg";
 import SpanLink from "./SpanLink";
 import UsersIcon from "../assets/UsersIcon.svg";
+import EditIcon from "../assets/EditIcon.svg";
 
 export default function SidebarLayout() {
   const [ddUbic, setDdUbic] = useState(false);
@@ -132,13 +133,20 @@ export default function SidebarLayout() {
                   <ul id="dropdown-inspection" className={`${ddInsp ? 'block' : 'hidden'} py-2 space-y-2`}>
                     <li>
                       <NavLink to="ver-inspectores" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
-
                         <SpanLink>
                           <img src={EyeIcon} alt="add-icon" width={23} height={25} />
                           Ver Inspectores
                         </SpanLink>
                       </NavLink>
                     </li>
+                    {/* <li>
+                      <NavLink to="editar-inspector" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                        <SpanLink>
+                          <img src={EditIcon} alt="add-icon" width={23} height={25} />
+                          Editar Inspector
+                        </SpanLink>
+                      </NavLink>
+                    </li> */}
                     <li>
                       <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                         <SpanLink>

@@ -5,9 +5,11 @@ import TrashSVG from "../../assets/trash.svg";
 import axios from "axios";
 import { API_URL } from "../../const/ApiUrl";
 import { Status } from "../../enums/Status.enum";
+import { useNavigate } from "react-router-dom";
 
 
 const VerInspectores = () => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState('');
     const [_, setStatus] = useState(Status.INFO)
 
@@ -31,6 +33,23 @@ const VerInspectores = () => {
     useEffect(() => {
         getInspectores();
     }, []);
+
+    const handleDelete = async (id: number) => {
+        try {
+            const result = await axios.delete(`${API_URL}/inspector/${id}`);
+            const { message, status } = result.data;
+            console.log(message, status)
+            setMessage(message);
+            setStatus(status === 200 ? Status.SUCCESS : Status.ERROR);
+            if (status === 200) {
+                getInspectores();
+            }
+        } catch (error) {
+            console.log(error);
+            setMessage(message);
+            setStatus(Status.ERROR);
+        }
+    }
 
     return (
         <div className="flex flex-col justify-center items-center text-white gap-14">
@@ -82,10 +101,12 @@ const VerInspectores = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex justify-start items-center gap-2">
-                                            <div>
+                                            <div onClick={() => {
+                                                navigate(`/editar-inspector/${inspector.id}`)
+                                            }}>
                                                 <img src={PencilSVG} alt="pencil" width={35} className="cursor-pointer" />
                                             </div>
-                                            <div>
+                                            <div onClick={() => handleDelete(inspector.id)}>
                                                 <img src={TrashSVG} alt="pencil" width={35} className="cursor-pointer" />
                                             </div>
 
