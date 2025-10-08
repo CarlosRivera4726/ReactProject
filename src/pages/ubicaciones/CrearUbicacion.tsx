@@ -38,12 +38,16 @@ const CrearUbicacion = () => {
     }
     return (
         <div className="flex flex-col justify-center items-center text-white gap-20">
-            <h1 className="text-2xl font-bold">Registro Ubicacion</h1>
+            <h1 className="text-2xl font-bold" style={{
+                color: "black"
+            }}>Registro Ubicacion</h1>
             {(message && message !== '') && <AlertsComponent message={message} status={status} />}
 
             <form className="w-96" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
-                    <label htmlFor="latitud" className={`${errors.latitud ? 'text-red-500' : ''} block text-sm font-medium`}>*Latitud</label>
+                    <label htmlFor="latitud" className={`${errors.latitud ? 'text-red-500' : ''} block text-sm font-medium`} style={{
+                        color: "black"
+                    }}>*Latitud</label>
                     <input
                         type="text"
                         id="latitud"
@@ -54,7 +58,10 @@ const CrearUbicacion = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="longitud" className={`${errors.longitud ? 'text-red-500' : ''} block text-sm font-medium`}>*Longitud</label>
+                    <label htmlFor="longitud" className={`${errors.longitud ? 'text-red-500' : ''} block text-sm font-medium`}
+                        style={{
+                            color: "black"
+                        }}>*Longitud</label>
                     <input
                         type="text"
                         id="longitud"
@@ -65,7 +72,9 @@ const CrearUbicacion = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="ubicacion" className={`${errors.ubicacion ? 'text-red-500' : ''} block text-sm font-medium`}>*Ubicacion</label>
+                    <label htmlFor="ubicacion" className={`${errors.ubicacion ? 'text-red-500' : ''} block text-sm font-medium`} style={{
+                        color: "black"
+                    }}>*Ubicacion</label>
                     <input
                         type="text"
                         id="ubicacion"
