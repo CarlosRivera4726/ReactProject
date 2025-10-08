@@ -14,6 +14,7 @@ import VerInspectores from "./pages/inspector/VerInspectores";
 import VerUsuarios from "./pages/usuario/VerUsuarios";
 import CrearUsuario from "./pages/usuario/CrearUsuario";
 import { EditarInspector } from "./pages/inspector/EditarInspector";
+import CrearInspector from "./pages/inspector/CrearInspector";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         {/** Inspectores */}
         <Route path="ver-inspectores" element={<VerInspectores />} />
         <Route path="editar-inspector/:id" element={<EditarInspector />} />
+        <Route path="crear-inspector" element={<CrearInspector />} />
         {/** usuarios */}
         <Route path="ver-usuarios" element={<VerUsuarios />} />
         <Route path="crear-usuario" element={<CrearUsuario />} />

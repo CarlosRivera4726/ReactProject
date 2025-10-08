@@ -131,10 +131,10 @@ export const EditarInspector = () => {
                     />
                 </div>
 
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer">
                     Actualizar
                 </button>
-                <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => {
+                <button type="button" className="bg-red-500 text-white px-4 py-2 rounded-md cursor-pointer" onClick={() => {
                     navigate('/ver-inspectores');
                 }}>
                     Cancelar

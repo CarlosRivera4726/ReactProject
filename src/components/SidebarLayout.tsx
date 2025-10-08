@@ -9,7 +9,7 @@ import EyeIcon from "../assets/EyeIcon.svg";
 import InspectionIcon from "../assets/InspectionIcon.svg";
 import SpanLink from "./SpanLink";
 import UsersIcon from "../assets/UsersIcon.svg";
-import EditIcon from "../assets/EditIcon.svg";
+import EditIcon from "../assets/pencil.svg";
 
 export default function SidebarLayout() {
   const [ddUbic, setDdUbic] = useState(false);
@@ -125,7 +125,7 @@ export default function SidebarLayout() {
                     className="cursor-pointer flex items-center w-full p-1 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                     aria-controls="dropdown-inspection" data-collapse-toggle="dropdown-inspection">
                     <img src={InspectionIcon} alt="location-icon" width={23} height={25} />
-                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Gestion Inspectiores</span>
+                    <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Gestion Inspectores</span>
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
@@ -139,14 +139,14 @@ export default function SidebarLayout() {
                         </SpanLink>
                       </NavLink>
                     </li>
-                    {/* <li>
-                      <NavLink to="editar-inspector" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
+                    <li>
+                      <NavLink to="crear-inspector" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                         <SpanLink>
                           <img src={EditIcon} alt="add-icon" width={23} height={25} />
-                          Editar Inspector
+                          Crear Inspector
                         </SpanLink>
                       </NavLink>
-                    </li> */}
+                    </li>
                     <li>
                       <NavLink to="ver-ubicaciones" onClick={() => setOpen(false)} className={({ isActive }) => `${linkBase} ${isActive ? active : ""}`}>
                         <SpanLink>

@@ -4,7 +4,7 @@ import { StatusLocation } from "../const/Status"
 const StatusLocationComponent = ({ status }: { status: string }) => {
     const statusMap = {
         [StatusLocation.AVAILABLE]: {
-            color: 'border border-green-400 text-green-400 text-center',
+            color: 'border border-green-800 text-green-800 text-center',
             text: 'Disponible'
         },
         [StatusLocation.UNAVAILABLE]: {

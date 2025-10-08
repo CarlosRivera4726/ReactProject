@@ -5,6 +5,6 @@ export interface Inspector extends IPersona {
   id: number;
   persona: IPersona;
   personaId: number;
-  location: Location;
+  Location: Location;
   locationId: number;
 }

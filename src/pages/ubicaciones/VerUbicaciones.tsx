@@ -6,6 +6,7 @@ import { API_URL } from "../../const/ApiUrl";
 import { StatusLocation } from "../../const/Status";
 import StatusLocationComponent from "../../components/StatusLocation.component";
 import pencilsvg from "../../assets/pencil.svg";
+import EditIcon from "../../assets/EditIcon";
 
 const VerUbicaciones = () => {
     const [ubicaciones, setUbicaciones] = useState<Location[]>([]);
@@ -31,9 +32,9 @@ const VerUbicaciones = () => {
     }, []);
     return (
         <div className="flex flex-col justify-center items-center text-white gap-14">
-            <h1 className="text-3xl font-bold">Ver Ubicaciones</h1>
+            <h1 className="text-3xl font-bold">Ubicaciones</h1>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[70rem]">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -61,7 +62,7 @@ const VerUbicaciones = () => {
                     <tbody>
                         {ubicaciones && ubicaciones.length > 0 ? (
                             ubicaciones.map((ubicacion) => (
-                                <tr key={ubicacion.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
+                                <tr key={ubicacion.id} className="bg-white text-black border-b border-gray-200">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {`UBI-${String(ubicacion.id).padStart(6, '0')}`}
                                     </th>
@@ -82,7 +83,7 @@ const VerUbicaciones = () => {
                                     <td className="px-6 py-4">
                                         <div className="flex justify-start items-center gap-2">
                                             <div data-tooltip-target="tooltip-dark">
-                                                <img src={pencilsvg} alt="pencil" width={35} className="cursor-pointer" />
+                                                <EditIcon />
                                             </div>
                                             <div id="tooltip-dark" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
                                                 Tooltip content

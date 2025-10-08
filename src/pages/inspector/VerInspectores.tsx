@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Inspector } from "../../interfaces/inspector.interface";
-import PencilSVG from "../../assets/pencil.svg";
-import TrashSVG from "../../assets/trash.svg";
+import PencilSVG from "../../assets/EditIcon";
+import TrashIcon from "../../assets/trash";
 import axios from "axios";
 import { API_URL } from "../../const/ApiUrl";
 import { Status } from "../../enums/Status.enum";
@@ -53,9 +53,9 @@ const VerInspectores = () => {
 
     return (
         <div className="flex flex-col justify-center items-center text-white gap-14">
-            <h1 className="text-3xl font-bold">Ver Inspectores</h1>
+            <h1 className="text-3xl font-bold">Inspectores</h1>
 
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[70rem]">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -83,7 +83,7 @@ const VerInspectores = () => {
                     <tbody>
                         {inspectores && inspectores.length > 0 ? (
                             inspectores.map((inspector) => (
-                                <tr key={inspector.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200">
+                                <tr key={inspector.id} className="odd:bg-white odd:text-black even:bg-[#706f9a] even:text-black border-b border-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {`INSP-${String(inspector.id).padStart(7, '0')}`}
                                     </th>
@@ -97,17 +97,17 @@ const VerInspectores = () => {
                                         {'•'.repeat(10)}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {inspector.locationId === null ? "No hay Ubicacion" : inspector.location.name}
+                                        {inspector.locationId === null ? "No hay Ubicacion" : inspector.Location.name}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="flex justify-start items-center gap-2">
                                             <div onClick={() => {
                                                 navigate(`/editar-inspector/${inspector.id}`)
                                             }}>
-                                                <img src={PencilSVG} alt="pencil" width={35} className="cursor-pointer" />
+                                                <PencilSVG />
                                             </div>
                                             <div onClick={() => handleDelete(inspector.id)}>
-                                                <img src={TrashSVG} alt="pencil" width={35} className="cursor-pointer" />
+                                                <TrashIcon />
                                             </div>
 
                                         </div>
