@@ -9,6 +9,7 @@ import { API_URL } from "../../const/ApiUrl";
 import type { IPersona } from "../../interfaces/persona.interface";
 import LoadingComponent from "../../components/LoadingComponent";
 import AlertsComponent from "../../components/alerts/Alerts.component";
+import FormularioPago from "../formulario_pago/Formulario";
 
 type Inputs = { email: string; password: string };
 
@@ -75,6 +76,7 @@ export default function Login() {
                     "linear-gradient(180deg, #070b1a 0%, #0b1b3d 100%)",
             }}
         >
+            <FormularioPago />
             <div className="w-[440px] max-w-full bg-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] p-8">
                 <h1 className="text-center text-[22px] font-semibold text-slate-900 mb-6">
                     Inicio sesión
