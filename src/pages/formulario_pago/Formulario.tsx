@@ -24,7 +24,12 @@ type FormValues = {
 const ISSUER_PLACEHOLDER = "Banco emisor";
 const INSTALLMENTS_PLACEHOLDER = "Cuotas";
 
-const FormularioPago = () => {
+interface FormularioPagoProps {
+    setProcessedPayment?: (processed: boolean) => void;
+}
+
+
+const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
     // ===== stable amount ref =====
     const amountRef = useRef<number>(50000.00);
 
@@ -419,15 +424,21 @@ const FormularioPago = () => {
             const { data } = await api.post("/mercado-pago/pay", payload);
             console.log("Pago creado:", data);
             alert(`Pago ${data?.status ?? "procesado"}`);
+            if (setProcessedPayment) {
+                setProcessedPayment(true);
+            }
         } catch (e: any) {
             console.error("Error en el pago:", e);
             console.error("Error response:", e?.response?.data);
             alert(`Error procesando el pago: ${e?.message || "Desconocido"}`);
+            if (setProcessedPayment) {
+                setProcessedPayment(false);
+            }
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="flex items-center justify-center p-4">
             <div className="w-full max-w-2xl">
                 <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 md:p-8">
                     <header className="mb-6">
