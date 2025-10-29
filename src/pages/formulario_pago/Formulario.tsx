@@ -531,7 +531,7 @@ const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
                                 </label>
                                 <select
                                     id={refs.identificationType}
-                                    defaultValue=""
+                                    defaultValue="CC"
                                     {...register("identificationType", { required: "Tipo requerido" })}
                                     className="h-11 w-full rounded-lg border-gray-300 bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
                                 >
