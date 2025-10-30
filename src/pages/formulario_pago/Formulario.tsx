@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import { api } from "../../lib/api";
+import axios from "axios";
+import { API_URL } from "../../const/ApiUrl";
 
 declare global {
     interface Window {
@@ -422,10 +424,17 @@ const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
             };
 
             const { data } = await api.post("/mercado-pago/pay", payload);
-            console.log("Pago creado:", data);
-            alert(`Pago ${data?.status ?? "procesado"}`);
-            if (setProcessedPayment) {
-                setProcessedPayment(true);
+            const response = await axios.post(`${API_URL}/mercado-pago/register-pay`, data);
+            const reverse = confirm(`Desea reversar su pago?\nPago: ${data.id}`);
+            if (reverse) {
+                setProcessedPayment && setProcessedPayment(false);
+                await axios.post(`${API_URL}/mercado-pago/reverse-pay`, { paymentId: data.id });
+                return;
+            } else {
+                alert(`Pago procesado con éxito. Estado: ${response.data.message}`);
+                if (setProcessedPayment) {
+                    setProcessedPayment(true);
+                }
             }
         } catch (e: any) {
             console.error("Error en el pago:", e);
