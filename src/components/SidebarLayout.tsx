@@ -177,7 +177,7 @@ export default function SidebarLayout() {
 
       {/* CONTENIDO — también blanco */}
       <div className="sm:ml-72">
-        <main className="min-h-screen w-full p-6 bg-white">
+        <main className="bg-white h-screen  shadow-[0_12px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
           {/* si NO quieres “tarjeta”, deja solo el Outlet */}
           <Outlet />
 

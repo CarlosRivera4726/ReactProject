@@ -43,11 +43,9 @@ const CrearUbicacion = () => {
             }}>Registro Ubicacion</h1>
             {(message && message !== '') && <AlertsComponent message={message} status={status} />}
 
-            <form className="w-96" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col w-96 gap-5 border border-white rounded-2xl p-5 bg-white text-black" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
-                    <label htmlFor="latitud" className={`${errors.latitud ? 'text-red-500' : ''} block text-sm font-medium`} style={{
-                        color: "black"
-                    }}>*Latitud</label>
+                    <label htmlFor="latitud" className={`${errors.latitud ? 'text-red-500' : ''} block text-sm font-medium`}>*Latitud</label>
                     <input
                         type="text"
                         id="latitud"
@@ -59,9 +57,7 @@ const CrearUbicacion = () => {
 
                 <div className="mb-4">
                     <label htmlFor="longitud" className={`${errors.longitud ? 'text-red-500' : ''} block text-sm font-medium`}
-                        style={{
-                            color: "black"
-                        }}>*Longitud</label>
+                       >*Longitud</label>
                     <input
                         type="text"
                         id="longitud"
@@ -72,9 +68,7 @@ const CrearUbicacion = () => {
                 </div>
 
                 <div className="mb-4">
-                    <label htmlFor="ubicacion" className={`${errors.ubicacion ? 'text-red-500' : ''} block text-sm font-medium`} style={{
-                        color: "black"
-                    }}>*Ubicacion</label>
+                    <label htmlFor="ubicacion" className={`${errors.ubicacion ? 'text-red-500' : ''} block text-sm font-medium`}>*Ubicacion</label>
                     <input
                         type="text"
                         id="ubicacion"

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Status } from "../../enums/Status.enum"
 import { API_URL } from "../../const/ApiUrl"
 import AlertsComponent from "../../components/alerts/Alerts.component"
+import FormularioPago from "../formulario_pago/Formulario"
 
 type Inputs = {
     name: string
@@ -14,6 +15,7 @@ type Inputs = {
 }
 
 const CrearUsuario = () => {
+    const [processedPayment, setProcessedPayment] = useState(false);
 
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState(Status.INFO);
@@ -59,71 +61,82 @@ const CrearUsuario = () => {
         }
     }
     return (
-        <div className="flex flex-col justify-center items-center text-white gap-10">
-            <h1 className="text-3xl font-bold">Crear Usuario</h1>
+        <>
+        
+            {processedPayment === false ? (
+                    <div className="flex flex-col justify-center items-center mt-10">
+                        <span className="text-red-400 text-2xl font-semibold">Se debe realizar un pago para registrar un usuario.</span>
+                        <FormularioPago setProcessedPayment={setProcessedPayment} />
+                    </div>
+                ) : (
+                    <div className="flex flex-col justify-center items-center text-black gap-10">
+                        <h1 className="text-3xl font-bold text-black">Crear Usuario</h1>
 
-            {(message && message !== '') && <AlertsComponent message={message} status={status} />}
+                        {(message && message !== '') && <AlertsComponent message={message} status={status} />}
 
-            <form className="flex flex-col w-96 gap-5 border border-white rounded-2xl p-5 bg-white text-black" onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4">
-                    <label htmlFor="name" className={`${errors.name ? 'text-red-500' : ''} block text-sm font-medium`}>*Nombre:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-                        placeholder="Juan"
-                        {...register("name", { required: true })}
-                    />
-                </div>
+                        <form className="flex flex-col w-96 gap-5 border border-white rounded-2xl p-5  text-black bg-[#0e1c58]" onSubmit={handleSubmit(onSubmit)}>
+                            <div className="mb-4">
+                                <label htmlFor="name" className={`${errors.name ? 'text-red-500' : ''} block text-sm font-medium`}>*Nombre:</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+                                    placeholder="Juan"
+                                    {...register("name", { required: true })}
+                                />
+                            </div>
 
-                <div className="mb-4">
-                    <label htmlFor="lastName" className={`${errors.lastName ? 'text-red-500' : ''} block text-sm font-medium`}>*Apellido:</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-                        placeholder="Perez"
-                        {...register("lastName", { required: true })}
-                    />
-                </div>
+                            <div className="mb-4">
+                                <label htmlFor="lastName" className={`${errors.lastName ? 'text-red-500' : ''} block text-sm font-medium`}>*Apellido:</label>
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+                                    placeholder="Perez"
+                                    {...register("lastName", { required: true })}
+                                />
+                            </div>
 
-                <div className="mb-4">
-                    <label htmlFor="email" className={`${errors.email ? 'text-red-500' : ''} block text-sm font-medium`}>*Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-                        placeholder="juan@mail.com"
-                        {...register("email", { required: true })}
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="password" className={`${errors.password ? 'text-red-500' : ''} block text-sm font-medium`}>*Contraseña:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-                        placeholder="Contraseña"
-                        {...register("password", { required: true })}
-                    />
-                </div>
+                            <div className="mb-4">
+                                <label htmlFor="email" className={`${errors.email ? 'text-red-500' : ''} block text-sm font-medium`}>*Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+                                    placeholder="juan@mail.com"
+                                    {...register("email", { required: true })}
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="password" className={`${errors.password ? 'text-red-500' : ''} block text-sm font-medium`}>*Contraseña:</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+                                    placeholder="Contraseña"
+                                    {...register("password", { required: true })}
+                                />
+                            </div>
 
-                <div className="mb-4">
-                    <label htmlFor="confirm_password" className={`${errors.confirm_password ? 'text-red-500' : ''} block text-sm font-medium`}>*Confirmar contraseña:</label>
-                    <input
-                        type="password"
-                        id="confirm_password"
-                        className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
-                        placeholder="Confirmar contraseña"
-                        {...register("confirm_password", { required: true })}
-                    />
-                </div>
+                            <div className="mb-4">
+                                <label htmlFor="confirm_password" className={`${errors.confirm_password ? 'text-red-500' : ''} block text-sm font-medium`}>*Confirmar contraseña:</label>
+                                <input
+                                    type="password"
+                                    id="confirm_password"
+                                    className="mt-1 p-2 w-full border border-gray-300 rounded-md text-black"
+                                    placeholder="Confirmar contraseña"
+                                    {...register("confirm_password", { required: true })}
+                                />
+                            </div>
 
-                <div>
-                    <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md font-semibold cursor-pointer">Registrar</button>
-                </div>
-            </form>
-        </div>
+                            <div>
+                                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md font-semibold cursor-pointer">Registrar</button>
+                            </div>
+                        </form>
+                    </div>
+                )
+            }
+        </>
     )
 }
 

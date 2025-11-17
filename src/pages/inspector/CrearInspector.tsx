@@ -59,12 +59,12 @@ const CrearInspector = () => {
         }
     }
     return (
-        <div className="flex flex-col justify-center items-center text-white gap-10">
+        <div className="flex flex-col justify-center items-center text-black gap-10">
             <h1 className="text-3xl font-bold">Crear Inspector</h1>
 
             {(message && message !== '') && <AlertsComponent message={message} status={status} />}
 
-            <form className="flex flex-col w-96 gap-5 border border-white rounded-2xl p-5 bg-white text-black" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col w-96 gap-5 border border-white rounded-2xl p-5 bg-white text-black " onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label htmlFor="name" className={`${errors.name ? 'text-red-500' : ''} block text-sm font-medium`}>*Nombre:</label>
                     <input

@@ -4,6 +4,7 @@ import { loadMercadoPago } from "@mercadopago/sdk-js";
 import { api } from "../../lib/api";
 import axios from "axios";
 import { API_URL } from "../../const/ApiUrl";
+import "./formulario.css"
 
 declare global {
     interface Window {
@@ -33,7 +34,7 @@ interface FormularioPagoProps {
 
 const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
     // ===== stable amount ref =====
-    const amountRef = useRef<number>(50000.00);
+    // const amountRef = useRef<number>(50000.00);
 
     const {
         register,
@@ -448,19 +449,19 @@ const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
 
     return (
         <div className="flex items-center justify-center p-4">
-            <div className="w-full max-w-2xl">
-                <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 md:p-8">
+            <div className="w-full max-w-3xl ">
+                <div className="bg-[#0e1c58] shadow-sm rounded-2xl border border-gray-100 p-6 md:p-8">
                     <header className="mb-6">
-                        <h1 className="text-2xl font-semibold text-gray-900">Pago con tarjeta</h1>
-                        <p className="text-sm text-gray-500">
+                        <h1 className="text-2xl font-semibold text-white">Pago con tarjeta</h1>
+                        <p className="text-sm text-white">
                             Completa los datos para procesar tu pago de{" "}
                             <span className="font-medium">${amount ?? 0}</span>.
                         </p>
                     </header>
 
-                    <form id="form-checkout" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    <form id="form-checkout" onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-white">
                         {/* PCI fields */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
                             <div>
                                 <label htmlFor={refs.cardNumber} className="block text-sm font-medium text-gray-700 mb-1">
                                     Número de la tarjeta
@@ -507,7 +508,7 @@ const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
                                     type="text"
                                     placeholder="Nombre y apellido"
                                     {...register("cardholderName", { required: "Campo requerido" })}
-                                    className="h-11 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+                                    className="h-11 w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 text-black"
                                 />
                                 {errors.cardholderName && (
                                     <p className="mt-1 text-xs text-red-600">{errors.cardholderName.message}</p>
@@ -619,7 +620,7 @@ const FormularioPago = ({ setProcessedPayment }: FormularioPagoProps) => {
                             {isSubmitting ? "Procesando..." : "Pagar ahora"}
                         </button>
 
-                        <p className="text-[11px] text-gray-500 text-center">
+                        <p className="text-[11px] text-gray-200 text-center">
                             Tus datos se procesan de forma segura a través de Mercado Pago.
                         </p>
                     </form>

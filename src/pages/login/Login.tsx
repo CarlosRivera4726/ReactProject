@@ -9,7 +9,6 @@ import { API_URL } from "../../const/ApiUrl";
 import type { IPersona } from "../../interfaces/persona.interface";
 import LoadingComponent from "../../components/LoadingComponent";
 import AlertsComponent from "../../components/alerts/Alerts.component";
-import FormularioPago from "../formulario_pago/Formulario";
 
 type Inputs = { email: string; password: string };
 
@@ -21,7 +20,6 @@ export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth();
-    const [processedPayment, setProcessedPayment] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
@@ -77,95 +75,89 @@ export default function Login() {
                     "linear-gradient(180deg, #070b1a 0%, #0b1b3d 100%)",
             }}
         >
-            {processedPayment === false ? (
-                <div>
-                    <FormularioPago setProcessedPayment={setProcessedPayment} />
-                </div>
-            ) : (
-                <div className="w-[440px] max-w-full bg-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] p-8">
-                    <h1 className="text-center text-[22px] font-semibold text-slate-900 mb-6">
-                        Inicio sesión
-                    </h1>
+            <div className="w-[440px] max-w-full bg-white rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] p-8">
+                <h1 className="text-center text-[22px] font-semibold text-slate-900 mb-6">
+                    Inicio sesión
+                </h1>
 
-                    {message !== "" && <AlertsComponent message={message} status={status} />}
+                {message !== "" && <AlertsComponent message={message} status={status} />}
 
-                    {SHOW_TEST_USER_BUTTON && <button
-                        onClick={createTestUser}
-                        className="mb-4 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg text-sm px-5 py-2.5"
-                    >
-                        Crear usuarios de prueba
-                    </button>}
+                {SHOW_TEST_USER_BUTTON && <button
+                    onClick={createTestUser}
+                    className="mb-4 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg text-sm px-5 py-2.5"
+                >
+                    Crear usuarios de prueba
+                </button>}
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                        <div>
-                            <label htmlFor="email" className="block mb-2 text-[13px] font-medium text-slate-700">
-                                Correo
-                            </label>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block mb-2 text-[13px] font-medium text-slate-700">
+                            Correo
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="inspector@gmail.com"
+                            autoComplete="email"
+                            className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            {...register("email", { required: true })}
+                        />
+                        {errors.email && (
+                            <span className="mt-1 block text-[12px] text-red-600">El campo es obligatorio.</span>
+                        )}
+                    </div>
+
+                    <div>
+                        <label htmlFor="password" className="block mb-2 text-[13px] font-medium text-slate-700">
+                            Contraseña
+                        </label>
+                        <div className="relative">
                             <input
-                                type="email"
-                                id="email"
-                                placeholder="inspector@gmail.com"
-                                autoComplete="email"
-                                className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                {...register("email", { required: true })}
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                placeholder="Ingrese su contraseña"
+                                autoComplete="current-password"
+                                className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 pr-10 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                {...register("password", { required: true })}
                             />
-                            {errors.email && (
-                                <span className="mt-1 block text-[12px] text-red-600">El campo es obligatorio.</span>
-                            )}
+                            <button
+                                type="button"
+                                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                                onClick={() => setShowPassword((v) => !v)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 grid place-items-center opacity-70 hover:opacity-100"
+                            >
+                                {showPassword ? (
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6 20 1.73 12 1.73 12a21.78 21.78 0 0 1 5.06-6.06" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c6 0 10.27 8 10.27 8a21.73 21.73 0 0 1-3.06 4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M14 10a4 4 0 0 1-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M3 3l18 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                                    </svg>
+                                ) : (
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M1.5 12S5.5 4 12 4s10.5 8 10.5 8-4 8-10.5 8S1.5 12 1.5 12Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                        <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.6" />
+                                    </svg>
+                                )}
+                            </button>
                         </div>
+                        {errors.password && (
+                            <span className="mt-1 block text-[12px] text-red-600">El campo es obligatorio.</span>
+                        )}
+                    </div>
 
-                        <div>
-                            <label htmlFor="password" className="block mb-2 text-[13px] font-medium text-slate-700">
-                                Contraseña
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    id="password"
-                                    placeholder="Ingrese su contraseña"
-                                    autoComplete="current-password"
-                                    className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 pr-10 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                    {...register("password", { required: true })}
-                                />
-                                <button
-                                    type="button"
-                                    aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-                                    onClick={() => setShowPassword((v) => !v)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 grid place-items-center opacity-70 hover:opacity-100"
-                                >
-                                    {showPassword ? (
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6 20 1.73 12 1.73 12a21.78 21.78 0 0 1 5.06-6.06" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c6 0 10.27 8 10.27 8a21.73 21.73 0 0 1-3.06 4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M14 10a4 4 0 0 1-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M3 3l18 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                                        </svg>
-                                    ) : (
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                            <path d="M1.5 12S5.5 4 12 4s10.5 8 10.5 8-4 8-10.5 8S1.5 12 1.5 12Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.6" />
-                                        </svg>
-                                    )}
-                                </button>
-                            </div>
-                            {errors.password && (
-                                <span className="mt-1 block text-[12px] text-red-600">El campo es obligatorio.</span>
-                            )}
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={!!errors.email || !!errors.password}
-                            className={`mt-2 h-11 w-full rounded-lg font-medium text-white transition
-              ${errors.email || errors.password
-                                    ? "bg-blue-400 cursor-not-allowed"
-                                    : "bg-[#2B68FF] hover:bg-[#2B68FF]/90 focus:ring-4 focus:ring-blue-300"}`}
-                        >
-                            Ingresar
-                        </button>
-                    </form>
-                </div>
-            )}
+                    <button
+                        type="submit"
+                        disabled={!!errors.email || !!errors.password}
+                        className={`mt-2 h-11 w-full rounded-lg font-medium text-white transition
+            ${errors.email || errors.password
+                                ? "bg-blue-400 cursor-not-allowed"
+                                : "bg-[#2B68FF] hover:bg-[#2B68FF]/90 focus:ring-4 focus:ring-blue-300"}`}
+                    >
+                        Ingresar
+                    </button>
+                </form>
+            </div>
         </div>
     )
     )
