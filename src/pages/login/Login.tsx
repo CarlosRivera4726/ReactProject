@@ -89,7 +89,7 @@ export default function Login() {
                     Crear usuarios de prueba
                 </button>}
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 rounded-lg p-2">
                     <div>
                         <label htmlFor="email" className="block mb-2 text-[13px] font-medium text-slate-700">
                             Correo

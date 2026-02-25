@@ -100,7 +100,7 @@ export default function SidebarLayout() {
                   <button type="button" onClick={() => setDdInsp(v => !v)} aria-expanded={ddInsp}
                     className={sectionBtn} aria-controls="dropdown-inspection" data-collapse-toggle="dropdown-inspection">
                     <img src={InspectionIcon} alt="inspection-icon" width={23} height={25} />
-                    <span className="flex-1 ms-3 text-left whitespace-nowrap">Gestion Inspectiores</span>
+                    <span className="flex-1 ms-3 text-left whitespace-nowrap">Gestion Inspectores</span>
                     <svg className="w-3 h-3 text-white/70" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                     </svg>
